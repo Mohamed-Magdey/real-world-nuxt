@@ -12,6 +12,18 @@ export default {
   components: {
     NavBar,
   },
+  head() {
+    return {
+      titleTemplate: '%s - Real World Events',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Where you can find all the place in your neighborhood.',
+        },
+      ],
+    }
+  },
 }
 </script>
 
