@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <nav-bar />
-    <Nuxt />
+    <transition name="slide-fade" appear>
+      <Nuxt />
+    </transition>
   </div>
 </template>
 
@@ -262,5 +264,18 @@ select::ms-expand {
 }
 .errorMessage {
   color: red;
+}
+/* Transitions */
+.slide-fade-enter {
+  transform: translateX(10px);
+  opacity: 0;
+}
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.5s ease;
+}
+.slide-fade-leave-to {
+  transform: translateX(-10px);
+  opacity: 0;
 }
 </style>
