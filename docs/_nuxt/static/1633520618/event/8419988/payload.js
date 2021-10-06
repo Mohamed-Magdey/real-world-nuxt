@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/event/8419988", (function(a){return {data:[{}],fetch:{},mutations:[["events\u002FSET_EVENT",{id:8419988,user:{id:"abc123",name:a},category:"animal welfare",organizer:a,title:"Kitty Cluster",description:"Yay cats!",location:"Catlandia",date:"2019-01-31T22:09:00.000Z",time:"7:00",attendees:[]}]]}}("Adam")));

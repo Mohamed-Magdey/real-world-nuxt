@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/event/4582797", (function(a){return {data:[{}],fetch:{},mutations:[["events\u002FSET_EVENT",{id:4582797,user:{id:"abc123",name:a},category:"animal welfare",organizer:a,title:"Puppy Parade",description:"Yay pups!",location:"Puptown ",date:"2019-02-02T23:27:00.000Z",time:"1:00",attendees:[]}]]}}("Adam")));

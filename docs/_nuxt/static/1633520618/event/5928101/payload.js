@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/event/5928101", (function(a){return {data:[{}],fetch:{},mutations:[["events\u002FSET_EVENT",{id:5928101,user:{id:"abc123",name:a},category:"animal welfare",organizer:a,title:"Cat Cabaret",description:"Yay felines!",location:"Meow Town",date:"2019-01-03T21:54:00.000Z",time:"2:00",attendees:[]}]]}}("Adam")));
