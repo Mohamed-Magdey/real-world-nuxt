@@ -2,7 +2,7 @@
   <div id="app">
     <nav-bar />
     <transition name="slide-fade" mode="out-in" appear>
-      <Nuxt />
+      <Nuxt :key="$route.fullPath" />
     </transition>
   </div>
 </template>

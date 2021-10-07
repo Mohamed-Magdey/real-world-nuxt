@@ -2,11 +2,22 @@
   <div>
     <h1>Events</h1>
     <EventCard
-      v-for="(event, index) in events"
+      v-for="(event, index) in events.events"
       :key="index"
       :event="event"
       :data-index="index"
     />
+    <template v-if="page !== 1">
+      <nuxt-link :to="{ name: 'index', query: { page: page - 1 } }" rel="prev">
+        Prev Page
+      </nuxt-link>
+      |
+    </template>
+    <template v-if="lastPage > 0">
+      <nuxt-link :to="{ name: 'index', query: { page: page + 1 } }" rel="next">
+        Next Page
+      </nuxt-link>
+    </template>
   </div>
 </template>
 
@@ -14,12 +25,16 @@
 import { mapState } from 'vuex'
 
 export default {
+  name: 'EventList',
   components: {
     EventCard: () => import('~/components/EventCard.vue'),
   },
-  async fetch({ store, error }) {
+  async fetch({ store, route, error }) {
     try {
-      await store.dispatch('events/fetchEvents')
+      const currentPage = parseInt(route.query.page) || 1
+      await store.dispatch('events/fetchEvents', {
+        page: currentPage,
+      })
     } catch (err) {
       error({
         statusCode: 503,
@@ -32,8 +47,15 @@ export default {
       title: 'Event Listing',
     }
   },
-  computed: mapState({
-    events: (state) => state.events.events,
-  }),
+  computed: {
+    page() {
+      return parseInt(this.$route.query.page) || 1
+    },
+    lastPage() {
+      return this.events.totalEvents - this.events.perPage * this.page
+    },
+    ...mapState(['events']),
+  },
+  watchQuery: ['page'],
 }
 </script>
