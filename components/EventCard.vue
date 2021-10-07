@@ -1,11 +1,12 @@
 <template>
   <nuxt-link :to="'/event/' + event.id">
-    <div class="-shadow">
+    <div class="event-card -shadow">
       <span class="eyebrow"> @{{ event.time }} on {{ parsedDate }} </span>
       <h4 class="title">
         {{ event.title }}
       </h4>
-      <span>{{ event.attendees.length }} attending</span>
+      <!-- <span>{{ event.attendees.length }} attending</span> -->
+      <BaseIcon name="users">{{ event.attendees.length }} attending</BaseIcon>
     </div>
   </nuxt-link>
 </template>
@@ -27,13 +28,13 @@ export default {
 </script>
 
 <style scoped>
-div {
+.event-card {
   padding: 20px;
   margin-bottom: 24px;
   transition: all 0.2s linear;
   cursor: pointer;
 }
-div:hover {
+.event-card:hover {
   transform: scale(1.01);
   box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2), 0 1px 15px 0 rgba(0, 0, 0, 0.19);
 }
