@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav-bar />
-    <transition name="slide-fade" appear>
+    <transition name="slide-fade" mode="out-in" appear>
       <Nuxt />
     </transition>
   </div>
