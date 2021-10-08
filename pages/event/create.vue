@@ -6,7 +6,6 @@
         v-model="event.category"
         label="Select a category"
         :options="categories"
-        :selected="option === value"
       />
       <h3>Name & describe your event</h3>
       <BaseInput
@@ -40,10 +39,11 @@
         v-model="event.time"
         label="Select a time"
         :options="times"
-        :selected="option === value"
         class="field"
       />
-      <input type="submit" class="button -fill-gradient" value="Submit" />
+      <BaseButton type="submit" class="button -fill-gradient">
+        Submit
+      </BaseButton>
     </form>
   </div>
 </template>
