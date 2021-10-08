@@ -29,14 +29,20 @@ export default {
   components: {
     EventCard: () => import('~/components/EventCard.vue'),
   },
-  async fetch({ store, route, error }) {
+  async fetch() {
     try {
-      const currentPage = parseInt(route.query.page) || 1
-      await store.dispatch('events/fetchEvents', {
-        page: currentPage,
-      })
+      this.$nuxt.$loading.start()
+      const currentPage = parseInt(this.$route.query.page) || 1
+
+      await this.$store
+        .dispatch('events/fetchEvents', {
+          page: currentPage,
+        })
+        .then(() => {
+          this.$nuxt.$loading.finish()
+        })
     } catch (err) {
-      error({
+      this.$nuxt.context.error({
         statusCode: 503,
         message: 'Unable to fetch events at this time. Please try again.',
       })
@@ -56,6 +62,5 @@ export default {
     },
     ...mapState(['events']),
   },
-  watchQuery: ['page'],
 }
 </script>
