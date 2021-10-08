@@ -23,7 +23,7 @@ export default {
   },
 
   // Customiz the progress-bar
-  loading: { color: '#39b982' },
+  loading: { color: '#39b982', throttle: 0 },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
