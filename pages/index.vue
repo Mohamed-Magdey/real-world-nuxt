@@ -31,16 +31,11 @@ export default {
   },
   async fetch() {
     try {
-      this.$nuxt.$loading.start()
       const currentPage = parseInt(this.$route.query.page) || 1
 
-      await this.$store
-        .dispatch('events/fetchEvents', {
-          page: currentPage,
-        })
-        .then(() => {
-          this.$nuxt.$loading.finish()
-        })
+      await this.$store.dispatch('events/fetchEvents', {
+        page: currentPage,
+      })
     } catch (err) {
       this.$nuxt.context.error({
         statusCode: 503,
@@ -62,5 +57,8 @@ export default {
     },
     ...mapState(['events']),
   },
+  // beforeCreate() {
+  //   this.$nuxt.$loading.start()
+  // },
 }
 </script>
