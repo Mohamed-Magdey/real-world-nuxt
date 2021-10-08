@@ -16,6 +16,9 @@ export const mutations = {
   },
   SET_TOTAl(state, total) {
     state.totalEvents = total;
+  },
+  ADD_EVENT(state, event) {
+    state.events.push(event)
   }
 }
 
@@ -29,6 +32,11 @@ export const actions = {
   fetchEvent({ commit }, id) {
     return EventService.getEvent(id).then(res => {
       commit('SET_EVENT', res.data)
+    })
+  },
+  createEvent({ commit }, event) {
+    return EventService.postEvent(event).then(() => {
+      commit('ADD_EVENT', event)
     })
   }
 }
