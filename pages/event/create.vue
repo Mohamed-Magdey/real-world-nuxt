@@ -33,7 +33,9 @@
       <h3>When is your event?</h3>
       <div class="field">
         <label>Date</label>
-        <date-picker v-model="event.date" placeholder="Select a date" />
+        <client-only>
+          <date-picker v-model="event.date" placeholder="Select a date" />
+        </client-only>
       </div>
       <BaseSelect
         v-model="event.time"
