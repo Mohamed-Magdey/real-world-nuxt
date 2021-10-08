@@ -39,13 +39,16 @@
 import { mapState } from 'vuex'
 
 export default {
-  async fetch({ store, error, params }) {
+  async fetch() {
     try {
-      await store.dispatch('events/fetchEvent', params.id)
+      await this.$store.dispatch(
+        'events/fetchEvent',
+        this.$nuxt.context.params.id
+      )
     } catch (e) {
-      error({
+      this.$nuxt.context.error({
         statusCode: 503,
-        message: `Unable to fetch event #${params.id}`,
+        message: `Unable to fetch event #${this.$nuxt.context.params.id}`,
       })
     }
   },
