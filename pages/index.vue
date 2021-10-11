@@ -57,8 +57,5 @@ export default {
     },
     ...mapState(['events']),
   },
-  // beforeCreate() {
-  //   this.$nuxt.$loading.start()
-  // },
 }
 </script>
