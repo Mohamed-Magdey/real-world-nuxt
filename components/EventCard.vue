@@ -5,7 +5,6 @@
       <h4 class="title">
         {{ event.title }}
       </h4>
-      <!-- <span>{{ event.attendees.length }} attending</span> -->
       <BaseIcon name="users">{{ event.attendees.length }} attending</BaseIcon>
     </div>
   </nuxt-link>

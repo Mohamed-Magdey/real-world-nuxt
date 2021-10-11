@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="event-header">
-      <span class="eyebrow"> @{{ event.time }} on {{ event.date }} </span>
+      <span class="eyebrow"> @{{ event.time }} on {{ parsedDate }} </span>
       <h1 class="title">
         {{ event.title }}
       </h1>
@@ -66,6 +66,10 @@ export default {
   },
   computed: mapState({
     event: (state) => state.events.event,
+    parsedDate() {
+      const eventDate = new Date(this.event.date)
+      return eventDate.toDateString()
+    },
   }),
 }
 </script>
