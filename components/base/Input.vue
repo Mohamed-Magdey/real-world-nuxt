@@ -1,7 +1,12 @@
 <template>
   <div>
     <label v-if="label">{{ label }}</label>
-    <input :value="value" v-bind="$attrs" @input="updateValue" />
+    <input
+      :value="value"
+      v-bind="$attrs"
+      @input="updateValue"
+      v-on="listeners"
+    />
   </div>
 </template>
 
@@ -15,6 +20,14 @@ export default {
     },
     // eslint-disable-next-line vue/require-default-prop
     value: [String, Number],
+  },
+  computed: {
+    listeners() {
+      return {
+        ...this.$listeners,
+        input: this.updateValue,
+      }
+    },
   },
   methods: {
     updateValue(event) {
