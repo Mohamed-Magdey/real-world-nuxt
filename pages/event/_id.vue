@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="eventLength !== 0">
     <div class="event-header">
       <span class="eyebrow"> @{{ event.time }} on {{ parsedDate }} </span>
       <h1 class="title">
@@ -40,17 +40,16 @@ import { mapState } from 'vuex'
 
 export default {
   async fetch() {
-    try {
-      await this.$store.dispatch(
-        'events/fetchEvent',
-        this.$nuxt.context.params.id
-      )
-    } catch (e) {
-      this.$nuxt.context.error({
-        statusCode: 503,
-        message: `Unable to fetch event #${this.$nuxt.context.params.id}`,
+    await this.$store
+      .dispatch('events/fetchEvent', this.$nuxt.context.params.id)
+      .then()
+      .catch((e) => {
+        this.$nuxt.context.error({
+          statusCode: 404,
+          message: `Event #${this.$route.params.id} not found.`,
+        })
+        this.$nuxt.context.next({ name: 'NuxtError' })
       })
-    }
   },
   head() {
     return {
@@ -64,13 +63,18 @@ export default {
       ],
     }
   },
-  computed: mapState({
-    event: (state) => state.events.event,
+  computed: {
+    ...mapState({
+      event: (state) => state.events.event,
+    }),
+    eventLength() {
+      return Object.keys(this.event).length
+    },
     parsedDate() {
       const eventDate = new Date(this.event.date)
       return eventDate.toDateString()
     },
-  }),
+  },
 }
 </script>
 
