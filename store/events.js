@@ -29,10 +29,18 @@ export const actions = {
       commit('SET_EVENTS', res.data)
     })
   },
-  fetchEvent({ commit }, id) {
-    return EventService.getEvent(id).then(res => {
-      commit('SET_EVENT', res.data)
-    })
+  fetchEvent({ commit, getters }, id) {
+    const event = getters.getEventById(id)
+
+    if (event) {
+      commit('SET_EVENT', event)
+      return event
+    } else {
+      return EventService.getEvent(id).then(res => {
+        commit('SET_EVENT', res.data)
+        return res.data
+      })
+    }
   },
   createEvent({ commit }, event) {
     return EventService.postEvent(event).then(() => {
@@ -40,3 +48,9 @@ export const actions = {
     })
   }
 }
+
+export const getters = {
+  getEventById: (state) => (id) => {
+    return state.events.filter(event => event.id === id)[0];
+  },
+};
